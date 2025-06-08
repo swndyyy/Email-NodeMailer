@@ -15,7 +15,7 @@ app.use(express.json({ limit: '10kb' }));
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 15,
-  message: 'Terlalu banyak request, coba lagi dalam 15 menit'
+  message: 'Too many requests, please try again in 15 minutes'
 });
 
 const speedLimiter = slowDown({
@@ -124,6 +124,10 @@ app.post('/send-email', limiter, speedLimiter, validateEmail, async (req, res) =
       res.status(500).json({ message: "Failed to send email" });
     }
   }
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // ==================== SERVER SETUP ====================
