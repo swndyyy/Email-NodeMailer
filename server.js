@@ -98,7 +98,7 @@ app.post('/send-email', limiter, speedLimiter, validateEmail, async (req, res) =
   
     
     const mailOptions = {
-      from: `"Client Email Sender" <${process.env.EMAIL_USER}>`,
+      from: `"Swn Mail" <${process.env.EMAIL_USER}>`,
       to,
       subject: `[Secure] ${subject}`,
       html: htmlTemplate[template],
@@ -125,10 +125,6 @@ app.post('/send-email', limiter, speedLimiter, validateEmail, async (req, res) =
       res.status(500).json({ message: "Failed to send email" });
     }
   }
-});
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // ==================== SERVER SETUP ====================
